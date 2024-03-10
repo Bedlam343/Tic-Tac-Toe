@@ -3,6 +3,7 @@ import { useState } from "react";
 import Grid from "./play-grid";
 import { playerType } from "@/types/player";
 import { Cell as CellType } from "@/types/cell";
+import Title from "@/components/Title";
 import Score from "@/components/Score";
 import NewGameButtom from "@/components/NewGameButton";
 
@@ -12,9 +13,10 @@ type winCounterType = {
 };
 
 const TicTacToe = () => {
+  const [turn, setTurn] = useState<playerType>("X");
   const [play, setPlay] = useState<boolean>(true);
   const [grid, setGrid] = useState<CellType[]>([]);
-  const [player, setPlayer] = useState<playerType>("X");
+  const [player, setPlayer] = useState<playerType>(turn);
   const [winCounter, setWinCounter] = useState<winCounterType>({
     X: 0,
     O: 0,
@@ -23,7 +25,8 @@ const TicTacToe = () => {
   const restart = () => {
     setPlay(true);
     setGrid([]);
-    setPlayer("X");
+    setPlayer(turn === "X" ? "O" : "X");
+    setTurn((currTurn) => (currTurn === "X" ? "O" : "X"));
   };
 
   const checkWinner = (g: CellType[]) => {
@@ -119,10 +122,7 @@ const TicTacToe = () => {
 
   return (
     <div className="pt-10">
-      <h1 className="text-center text-5xl">
-        TIC<span style={{ color: "#393BB2" }}>-</span>TAC
-        <span style={{ color: "#393BB2" }}>-</span>TOE
-      </h1>
+      <Title />
 
       <div
         style={{ position: "absolute", top: "20%" }}
@@ -132,17 +132,17 @@ const TicTacToe = () => {
       </div>
 
       <div
-        style={{ position: "absolute", top: "68.5%" }}
         className="flex items-center justify-center w-[100%]"
+        style={{ position: "absolute", top: "62%" }}
       >
-        <NewGameButtom onClick={restart} disabled={grid.length === 0} />
+        <Score xScore={winCounter.X} oScore={winCounter.O} active={player} />
       </div>
 
       <div
+        style={{ position: "absolute", top: "85%" }}
         className="flex items-center justify-center w-[100%]"
-        style={{ position: "absolute", top: "75%" }}
       >
-        <Score xScore={winCounter.X} oScore={winCounter.O} />
+        <NewGameButtom onClick={restart} disabled={grid.length === 0} />
       </div>
     </div>
   );

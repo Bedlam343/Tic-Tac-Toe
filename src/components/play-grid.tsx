@@ -28,55 +28,55 @@ const Grid = ({ grid, onCellClick }: PropTypes) => {
       <div className="z-10 h-full grid grid-cols-3">
         <div
           onClick={() => onCellClick(0)}
-          className="h-[100px] z-10 flex items-center justify-center border-b-2 border-r-2 border-gray-600"
+          className="h-[100px] cursor-pointer z-10 flex items-center justify-center border-b-2 border-r-2 border-gray-600"
         >
           <Cell cell={grid[0]} />
         </div>
         <div
           onClick={() => onCellClick(1)}
-          className="h-[100px] z-10 flex items-center justify-center border-r-2 border-b-2 border-gray-600"
+          className="h-[100px] cursor-pointer z-10 flex items-center justify-center border-r-2 border-b-2 border-gray-600"
         >
           <Cell cell={grid[1]} />
         </div>
         <div
           onClick={() => onCellClick(2)}
-          className="h-[100px] z-10 flex items-center justify-center border-b-2 border-gray-600"
+          className="h-[100px] cursor-pointer z-10 flex items-center justify-center border-b-2 border-gray-600"
         >
           <Cell cell={grid[2]} />
         </div>
         <div
           onClick={() => onCellClick(3)}
-          className="h-[100px] z-10 flex items-center justify-center border-b-2 border-r-2 border-gray-600"
+          className="h-[100px] cursor-pointer z-10 flex items-center justify-center border-b-2 border-r-2 border-gray-600"
         >
           <Cell cell={grid[3]} />
         </div>
         <div
           onClick={() => onCellClick(4)}
-          className="h-[100px] z-10 flex items-center justify-center border-r-2 border-b-2 border-gray-600"
+          className="h-[100px] cursor-pointer z-10 flex items-center justify-center border-r-2 border-b-2 border-gray-600"
         >
           <Cell cell={grid[4]} />
         </div>
         <div
           onClick={() => onCellClick(5)}
-          className="h-[100px] z-10 flex items-center justify-center border-b-2 border-gray-600"
+          className="h-[100px] cursor-pointer z-10 flex items-center justify-center border-b-2 border-gray-600"
         >
           <Cell cell={grid[5]} />
         </div>
         <div
           onClick={() => onCellClick(6)}
-          className="h-[100px] z-10 flex items-center justify-center border-r-2 border-gray-600"
+          className="h-[100px] cursor-pointer z-10 flex items-center justify-center border-r-2 border-gray-600"
         >
           <Cell cell={grid[6]} />
         </div>
         <div
           onClick={() => onCellClick(7)}
-          className="h-[100px] z-10 flex items-center justify-center border-r-2 border-gray-600"
+          className="h-[100px] cursor-pointer z-10 flex items-center justify-center border-r-2 border-gray-600"
         >
           <Cell cell={grid[7]} />
         </div>
         <div
           onClick={() => onCellClick(8)}
-          className="h-[100px] z-10 flex items-center justify-center"
+          className="h-[100px] cursor-pointer z-10 flex items-center justify-center"
         >
           <Cell cell={grid[8]} />
         </div>
