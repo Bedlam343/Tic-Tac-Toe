@@ -3,11 +3,22 @@ import { useState } from "react";
 import Grid from "./play-grid";
 import { playerType } from "@/types/player";
 import { Cell as CellType } from "@/types/cell";
+import Score from "@/components/Score";
+import NewGameButtom from "@/components/NewGameButton";
+
+type winCounterType = {
+  X: number;
+  O: number;
+};
 
 const TicTacToe = () => {
   const [play, setPlay] = useState<boolean>(true);
   const [grid, setGrid] = useState<CellType[]>([]);
   const [player, setPlayer] = useState<playerType>("X");
+  const [winCounter, setWinCounter] = useState<winCounterType>({
+    X: 0,
+    O: 0,
+  });
 
   const restart = () => {
     setPlay(true);
@@ -17,54 +28,63 @@ const TicTacToe = () => {
 
   const checkWinner = (g: CellType[]) => {
     const winningCells = [];
+    let winnerPlayer = "";
     if (
       g[0]?.value &&
       g[0]?.value === g[1]?.value &&
       g[1]?.value === g[2]?.value
     ) {
       winningCells.push(0, 1, 2);
+      winnerPlayer = g[0].value;
     } else if (
       g[0]?.value &&
       g[0]?.value === g[3]?.value &&
       g[3]?.value === g[6]?.value
     ) {
       winningCells.push(0, 3, 6);
+      winnerPlayer = g[0].value;
     } else if (
       g[0]?.value &&
       g[0]?.value === g[4]?.value &&
       g[4]?.value === g[8]?.value
     ) {
       winningCells.push(0, 4, 8);
+      winnerPlayer = g[0].value;
     } else if (
       g[1]?.value &&
       g[1]?.value === g[4]?.value &&
       g[4]?.value === g[7]?.value
     ) {
       winningCells.push(1, 4, 7);
+      winnerPlayer = g[1].value;
     } else if (
       g[2]?.value &&
       g[2]?.value === g[4]?.value &&
       g[4]?.value === g[6]?.value
     ) {
       winningCells.push(2, 4, 6);
+      winnerPlayer = g[2].value;
     } else if (
       g[2]?.value &&
       g[2]?.value === g[5]?.value &&
       g[5]?.value === g[8]?.value
     ) {
       winningCells.push(2, 5, 8);
+      winnerPlayer = g[2].value;
     } else if (
       g[3]?.value &&
       g[3]?.value === g[4]?.value &&
       g[4]?.value === g[5]?.value
     ) {
       winningCells.push(3, 4, 5);
+      winnerPlayer = g[3].value;
     } else if (
       g[6]?.value &&
       g[6]?.value === g[7]?.value &&
       g[7]?.value === g[8]?.value
     ) {
       winningCells.push(6, 7, 8);
+      winnerPlayer = g[6].value;
     }
 
     if (winningCells.length > 0) {
@@ -74,6 +94,10 @@ const TicTacToe = () => {
       });
       setGrid(newGrid);
       setPlay(false);
+      setWinCounter({
+        ...winCounter,
+        [winnerPlayer]: winCounter[winnerPlayer as playerType] + 1,
+      });
     }
   };
 
@@ -107,22 +131,19 @@ const TicTacToe = () => {
         <Grid grid={grid} onCellClick={handleCellClick} />
       </div>
 
-      {!play && (
-        <div
-          style={{ position: "absolute", top: "70%" }}
-          className="flex items-center justify-center w-[100%]"
-        >
-          <button
-            onClick={restart}
-            className="z-10 cursor-pointer relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
-          >
-            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
-              New Game
-            </span>
-          </button>
-        </div>
-      )}
+      <div
+        style={{ position: "absolute", top: "68.5%" }}
+        className="flex items-center justify-center w-[100%]"
+      >
+        <NewGameButtom onClick={restart} disabled={grid.length === 0} />
+      </div>
+
+      <div
+        className="flex items-center justify-center w-[100%]"
+        style={{ position: "absolute", top: "75%" }}
+      >
+        <Score xScore={winCounter.X} oScore={winCounter.O} />
+      </div>
     </div>
   );
 };
