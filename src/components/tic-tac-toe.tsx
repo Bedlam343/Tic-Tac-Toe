@@ -53,8 +53,19 @@ const TicTacToe = () => {
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <Grid grid={grid} onCellClick={handleCellClick} />
+    <div className="pt-10">
+      <h1 className="text-center text-5xl">
+        TIC<span className="text-amber-800">-</span>TAC
+        <span className="text-amber-800">-</span>TOE
+      </h1>
+
+      <div
+        style={{ position: "absolute", top: "20%" }}
+        className="w-[100%] flex items-center justify-center"
+      >
+        <Grid grid={grid} onCellClick={handleCellClick} />
+      </div>
+      <div className="h-[50px]" />
     </div>
   );
 };
