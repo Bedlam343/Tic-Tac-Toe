@@ -1,15 +1,24 @@
 "use client";
 import React from "react";
+import { Cell as CellType } from "@/types/cell";
 
-type CellTextPropType = {
-  children: string;
+type CellPropsType = {
+  cell: CellType;
 };
-const CellText = ({ children }: CellTextPropType) => {
-  return <p className="text-3xl">{children}</p>;
+const Cell = ({ cell }: CellPropsType) => {
+  const size = cell?.isWinningCell
+    ? "text-6xl text-amber-800"
+    : "text-4xl text-white";
+  const color = cell?.isWinningCell ? "#393BB2" : "white";
+  return (
+    <p style={{ color }} className={size}>
+      {cell?.value}
+    </p>
+  );
 };
 
 type PropTypes = {
-  grid: string[];
+  grid: CellType[];
   onCellClick: (index: number) => void;
 };
 
@@ -21,55 +30,55 @@ const Grid = ({ grid, onCellClick }: PropTypes) => {
           onClick={() => onCellClick(0)}
           className="h-[100px] z-10 flex items-center justify-center border-b-2 border-r-2 border-gray-600"
         >
-          <CellText>{grid[0]}</CellText>
+          <Cell cell={grid[0]} />
         </div>
         <div
           onClick={() => onCellClick(1)}
           className="h-[100px] z-10 flex items-center justify-center border-r-2 border-b-2 border-gray-600"
         >
-          <CellText>{grid[1]}</CellText>
+          <Cell cell={grid[1]} />
         </div>
         <div
           onClick={() => onCellClick(2)}
           className="h-[100px] z-10 flex items-center justify-center border-b-2 border-gray-600"
         >
-          <CellText>{grid[2]}</CellText>
+          <Cell cell={grid[2]} />
         </div>
         <div
           onClick={() => onCellClick(3)}
           className="h-[100px] z-10 flex items-center justify-center border-b-2 border-r-2 border-gray-600"
         >
-          <CellText>{grid[3]}</CellText>
+          <Cell cell={grid[3]} />
         </div>
         <div
           onClick={() => onCellClick(4)}
           className="h-[100px] z-10 flex items-center justify-center border-r-2 border-b-2 border-gray-600"
         >
-          <CellText>{grid[4]}</CellText>
+          <Cell cell={grid[4]} />
         </div>
         <div
           onClick={() => onCellClick(5)}
           className="h-[100px] z-10 flex items-center justify-center border-b-2 border-gray-600"
         >
-          <CellText>{grid[5]}</CellText>
+          <Cell cell={grid[5]} />
         </div>
         <div
           onClick={() => onCellClick(6)}
           className="h-[100px] z-10 flex items-center justify-center border-r-2 border-gray-600"
         >
-          <CellText>{grid[6]}</CellText>
+          <Cell cell={grid[6]} />
         </div>
         <div
           onClick={() => onCellClick(7)}
           className="h-[100px] z-10 flex items-center justify-center border-r-2 border-gray-600"
         >
-          <CellText>{grid[7]}</CellText>
+          <Cell cell={grid[7]} />
         </div>
         <div
           onClick={() => onCellClick(8)}
           className="h-[100px] z-10 flex items-center justify-center"
         >
-          <CellText>{grid[8]}</CellText>
+          <Cell cell={grid[8]} />
         </div>
       </div>
     </div>
