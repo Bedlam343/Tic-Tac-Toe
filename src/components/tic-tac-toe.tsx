@@ -142,7 +142,7 @@ const TicTacToe = () => {
         style={{ position: "absolute", top: "85%" }}
         className="flex items-center justify-center w-[100%]"
       >
-        <NewGameButtom onClick={restart} disabled={grid.length === 0} />
+        <NewGameButtom onClick={restart} disabled={false} />
       </div>
     </div>
   );
